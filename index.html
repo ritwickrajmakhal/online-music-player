@@ -17,6 +17,7 @@
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
   <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
@@ -37,8 +38,7 @@
 
       </div>
 
-      <audio preload="auto" onended="nextSong()" onpause="pauseMusic()"
-        src="https://pwdown.com/14276/variation/190K/Humnava%20Mere%20-%20Jubin%20Nautiyal.mp3"></audio>
+      <audio preload="auto" onended="nextSong()" onpause="pauseMusic()" src="./default.mp3"></audio>
       <div class="controls">
         <i class="fas fa-repeat"></i>
         <select id="sleepbtn" onchange="gotoSleep()">
@@ -66,24 +66,5 @@
   </div>
   <script src="script.js"></script>
 </body>
-<script>
-  const main_div = document.querySelector(".main_div");
-  const music_container = document.querySelector(".music_container");
-  const fas = document.querySelector(".fas");
-  var d = new Date();
-  var h = d.getHours();
-  if (h >= 18 || h <= 6) {
-    //night mode on
-    main_div.setAttribute("style", "background-Color:#141d26;");
-    music_container.setAttribute("style", "background-Color:#243447;color:white;box-shadow:0 1.2rem 3rem 0.5rem #009999;");
-    sleepBtn.setAttribute("style", "background-Color:#243447;color:white");
-  } else {
-    //night mode off
-    main_div.setAttribute("style", "background-color:#ccffff;");
-    music_container.setAttribute("style", "background-color:#e6e6e6;color: #171717;box-shadow:0 1.2rem 3rem 0.5rem rgba(0,0,0,0.2);");
-    sleepBtn.setAttribute("style", "background-Color:#e6e6e6;color:black");
-
-  }
-</script>
 
 </html>

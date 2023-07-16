@@ -14,19 +14,23 @@ const play = document.getElementById("play");
 const btn2 = document.querySelector(".fa-random");
 const btn = document.querySelector(".fa-repeat");
 const sleepBtn = document.querySelector("#sleepbtn");
+const music_container = document.getElementsByClassName("music_container")[0];
 let isPlaying = false;
+let songs = []
 
 const playMusic = () => {
   music.play();
-
+  
   isPlaying = true;
-
+  
   play.classList.replace("fa-play", "fa-pause");
-
+  
   img.classList.add("anime");
+  music_container.classList.add("glow");
 };
 
 const pauseMusic = () => {
+  music_container.classList.remove("glow")
   music.pause();
 
   isPlaying = false;
@@ -34,6 +38,7 @@ const pauseMusic = () => {
   play.classList.replace("fa-pause", "fa-play");
 
   img.classList.remove("anime");
+  music_container.classList.remove("glow");
 };
 
 play.addEventListener("click", () => {
@@ -45,7 +50,7 @@ const loadSong = (song) => {
 
   artist.textContent = song.artist;
 
-  music.src = song.name;
+  music.src = song.src;
 
   img.src = song.image;
 };
@@ -154,25 +159,33 @@ function sleep() {
 }
 
 const searchBox = document.getElementById("searchBox");
-const playerView = document.getElementById("playerView");
 searchBox.addEventListener("keyup", async (event) => {
+  const q = event.target.value.toLowerCase();
   if (event.key === 'Enter') {
-    const url = 'https://spotify23.p.rapidapi.com/search/?q=tumhe%20kitna&type=multi&offset=0&limit=10&numberOfTopResults=5';
+    const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${q}`;
     const options = {
       method: 'GET',
       headers: {
         'X-RapidAPI-Key': 'ef40c740f7mshb4de3995ef42ed5p13273fjsn720d07741f29',
-        'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
+        'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
       }
     };
 
     try {
       const response = await fetch(url, options);
-      const result = await response.text();
-      console.log(result);
+      const data = await response.json();
+      data["data"].forEach(item => {
+        songs.push({
+          title : item["title"],
+          src : item["preview"],
+          image : item["album"]["cover_medium"],
+          artist : item["artist"]["name"]
+        })
+      });
+      loadSong(songs[0]);
     } catch (error) {
-      console.error(error);
+      alert("Not found!")
     }
-    
+
   }
 });
