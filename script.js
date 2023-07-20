@@ -183,6 +183,7 @@ searchBtn.addEventListener("click", async (event) => {
       })
     });
     loadSong(songs[0]);
+    pauseMusic();
   } catch (error) {
     alert(`${q} Not found!`)
   }
