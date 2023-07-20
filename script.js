@@ -182,7 +182,8 @@ searchBtn.addEventListener("click", async (event) => {
         artist: item["artist"]["name"]
       })
     });
-    loadSong(songs[0]);
+    songIndex = 0;
+    loadSong(songs[songIndex]);
     pauseMusic();
   } catch (error) {
     alert(`${q} Not found!`)
