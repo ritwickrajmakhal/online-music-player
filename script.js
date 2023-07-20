@@ -20,11 +20,11 @@ let songs = []
 
 const playMusic = () => {
   music.play();
-  
+
   isPlaying = true;
-  
+
   play.classList.replace("fa-play", "fa-pause");
-  
+
   img.classList.add("anime");
   music_container.classList.add("glow");
 };
@@ -159,7 +159,7 @@ function sleep() {
 }
 
 const searchBox = document.getElementById("searchBox");
-searchBox.addEventListener("keyup", async (event) => {
+searchBox.addEventListener("keydown", async (event) => {
   const q = event.target.value.toLowerCase();
   if (event.key === 'Enter') {
     const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${q}`;
@@ -176,10 +176,10 @@ searchBox.addEventListener("keyup", async (event) => {
       const data = await response.json();
       data["data"].forEach(item => {
         songs.push({
-          title : item["title"],
-          src : item["preview"],
-          image : item["album"]["cover_medium"],
-          artist : item["artist"]["name"]
+          title: item["title"],
+          src: item["preview"],
+          image: item["album"]["cover_medium"],
+          artist: item["artist"]["name"]
         })
       });
       loadSong(songs[0]);
