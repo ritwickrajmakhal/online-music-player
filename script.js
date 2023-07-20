@@ -158,34 +158,33 @@ function sleep() {
   sleepBtn.selectedIndex = 0;
 }
 
-const searchBox = document.getElementById("searchBox");
-searchBox.addEventListener("keydown", async (event) => {
-  const q = event.target.value.toLowerCase();
-  if (event.key === 'Enter') {
-    const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${q}`;
-    const options = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': 'ef40c740f7mshb4de3995ef42ed5p13273fjsn720d07741f29',
-        'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-      }
-    };
-
-    try {
-      const response = await fetch(url, options);
-      const data = await response.json();
-      data["data"].forEach(item => {
-        songs.push({
-          title: item["title"],
-          src: item["preview"],
-          image: item["album"]["cover_medium"],
-          artist: item["artist"]["name"]
-        })
-      });
-      loadSong(songs[0]);
-    } catch (error) {
-      alert("Not found!")
+const searchBtn = document.getElementById("searchBtn");
+searchBtn.addEventListener("click", async (event) => {
+  const searchBox = document.getElementById("searchBox");
+  const q = searchBox.value.toLowerCase();
+  const url = `https://deezerdevs-deezer.p.rapidapi.com/search?q=${q}`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'ef40c740f7mshb4de3995ef42ed5p13273fjsn720d07741f29',
+      'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
     }
+  };
 
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    data["data"].forEach(item => {
+      songs.push({
+        title: item["title"],
+        src: item["preview"],
+        image: item["album"]["cover_medium"],
+        artist: item["artist"]["name"]
+      })
+    });
+    loadSong(songs[0]);
+  } catch (error) {
+    alert(`${q} Not found!`)
   }
+
 });

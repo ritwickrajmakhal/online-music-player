@@ -220,16 +220,34 @@ img {
   margin-top: 2.5rem;
 }
 
-#searchBox {
-  font-size: 1.5rem;
-  border: 1px solid cyan;
-  padding: 0.5rem 1rem;
+.search_bar{
+  height: fit-content;
+  border: 1px solid white;
   border-radius: 15px;
-  background-color: inherit;
-  color: white;
+  display: flex;
+  justify-content:space-between;
+  background-color: transparent;
 }
 
+.search_bar input {
+  width: 80%;
+  background-color: inherit;
+  font-size: 1.5rem;
+  color: white;
+  padding: 0.7rem 1rem;
+  border: none;
+  outline: none;
+}
+.search_bar button{
+  background-color: inherit;
+  border: none;
+  border-left: 1px solid white;
+  color: white;
+  outline: none;
+  padding: 0rem 1rem;
+  cursor: pointer;
+}
 #searchBox::placeholder {
-  color: cyan;
+  color: white;
   text-align: center;
 }
