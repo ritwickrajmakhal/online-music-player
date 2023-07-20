@@ -170,10 +170,10 @@ searchBtn.addEventListener("click", async (event) => {
       'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
     }
   };
-
   try {
     const response = await fetch(url, options);
     const data = await response.json();
+    songs = []
     data["data"].forEach(item => {
       songs.push({
         title: item["title"],
